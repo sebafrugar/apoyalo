@@ -1,34 +1,30 @@
-import React, { Component} from 'react';
+import React, {useState} from 'react';
 
-class PersonCard extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-          contador : 0
-        }; 
+const Apoyalo = (props) => {
+
+    const {firstName,lastName,age,hairColor}  = props;
+
+    const [ageUser,setageUser] = useState(age)
+
+    const handlerageUser = () =>{
+        setageUser(ageUser+1)
     }
-    botonIncrementar(){
-        this.setState({
-            contador: this.state.contador+1
-        });
+
+    const errorageUser = () =>{
+        setageUser(ageUser-1)
     }
-    botonMeEquivoque(){
-        this.setState({
-            contador: this.state.contador-1
-        })
-    }
-    render(){
-        const {firstName,lastName,age,hairColor} = this.props;
-        return(
-            <div>
-                <h1>{lastName} , {firstName} </h1>
-                <p>Age: {parseInt(age)+ this.state.contador},  </p>
-                <p>Hair Color: {hairColor}</p>
-                <button onClick={ ()=> this.botonIncrementar()}>Boton de cumpleaños de {firstName} {lastName}</button><br />
-                <button onClick={()=> this.botonMeEquivoque()}>Me equivoque en la edad </button>
-            </div>
-        )
-    }
+    
+
+    return (
+        
+        <div>
+            <h1>{lastName} , {firstName} </h1>
+            <p>Age: {ageUser},  </p>
+            <p>Hair Color: {hairColor}</p>
+            <button onClick={()=>handlerageUser()}>Boton de cumpleaños de {firstName} {lastName}</button><br />
+            <button onClick={()=>errorageUser()}>Me equivoque en la edad </button>
+        </div>
+    );
 }
 
-export default PersonCard;
+export default Apoyalo;
